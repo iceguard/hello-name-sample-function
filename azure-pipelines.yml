@@ -23,3 +23,4 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     summaryFileLocation: '**/site/jacoco/jacoco.xml'
     goals: 'package'
+# TODO: Find a way to deploy jar / artifact to azure function (maven deploy?)
