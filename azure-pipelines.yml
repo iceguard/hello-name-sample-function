@@ -43,4 +43,5 @@ steps:
   displayName: 'Archive $(Build.ArtifactStagingDirectory)/target/azure-functions/$(functionAppMvnTargetFolder)'
   inputs:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/target/azure-functions/$(functionAppMvnTargetFolder)'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     includeRootFolder: false
