@@ -33,7 +33,7 @@ steps:
     -Dsonar.organization=iceguard \
     -Dsonar.host.url=https://sonarcloud.io \
     -Dsonar.login=$SONARCUBE_LOGIN
-- task: CopyFiles
+- task: CopyFiles@2
   displayName: 'Copy Files to: Artifact staging'
   inputs:
     SourceFolder: '${sytem.defaultworkingdirectory}'
