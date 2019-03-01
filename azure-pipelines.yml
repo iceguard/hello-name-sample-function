@@ -36,9 +36,9 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to: Artifact staging'
   inputs:
-    SourceFolder: '${System.DefaultWorkingDirectory}'
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
     Contents: '**/azure-functions/**'
-    TargetFolder: '${Build.ArtifactStagingDirectory}'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 - task: ArchiveFiles@2
   displayName: 'Archive $Build.ArtifactStagingDirectory/target/azure-functions/$(functionAppMvnTargetFolder)'
   inputs:
