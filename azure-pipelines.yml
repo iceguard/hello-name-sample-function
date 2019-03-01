@@ -10,7 +10,8 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- task: Maven-Package
+- task: Maven@3
+  displayName: Maven-Package
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -23,7 +24,8 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     summaryFileLocation: '**/site/jacoco/jacoco.xml'
     goals: 'package'
-- task: Maven-Publish
+- task: Maven@3
+  displayName: Maven-Deploy
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     mavenPomFile: 'pom.xml'
