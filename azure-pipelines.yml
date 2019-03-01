@@ -45,3 +45,6 @@ steps:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/target/azure-functions/$(functionAppMvnTargetFolder)'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     includeRootFolder: false
+- bash: 'ls $(Build.ArtifactStagingDirectory)'
+    displayName: 'Bash Script'
+
