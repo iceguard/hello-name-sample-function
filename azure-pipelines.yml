@@ -36,7 +36,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to: Artifact staging'
   inputs:
-    SourceFolder: '${sytem.defaultworkingdirectory}'
+    SourceFolder: '${system.defaultworkingdirectory}'
     Contents: '**/azure-functions/**'
     TargetFolder: '${build.artifactstagingdirectory}'
 - task: ArchiveFiles@2
