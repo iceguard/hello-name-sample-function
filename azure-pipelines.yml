@@ -23,6 +23,8 @@ steps:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     summaryFileLocation: '**/site/jacoco/jacoco.xml'
+    additionalCodeCoverageFiles: '**/*.exec'
+    reportDirectory: '**/site/jacoco'
     goals: 'package'
 - task: Maven@3
   displayName: Maven-Deploy
