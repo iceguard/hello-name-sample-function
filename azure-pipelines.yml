@@ -21,7 +21,7 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
+    publishJUnitResults: false
     codeCoverageTool: 'JaCoCo'
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
@@ -33,3 +33,21 @@ steps:
     -Dsonar.organization=iceguard \
     -Dsonar.host.url=https://sonarcloud.io \
     -Dsonar.login=$SONARCUBE_LOGIN
+- task: CopyFiles@2
+  displayName: 'Copy Files to: Artifact staging'
+  inputs:
+    SourceFolder: $(System.DefaultWorkingDirectory)
+    Contents: '**/azure-functions/**'
+    TargetFolder: $(Build.ArtifactStagingDirectory)
+- task: ArchiveFiles@2
+  displayName: 'Archive $(Build.ArtifactStagingDirectory)/target/azure-functions/$(functionAppMvnTargetFolder)'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/target/azure-functions/$(functionAppMvnTargetFolder)'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    includeRootFolder: false
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    artifactName: 'hello-world-function-artifact'
+
+
