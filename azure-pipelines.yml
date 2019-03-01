@@ -33,3 +33,14 @@ steps:
     -Dsonar.organization=iceguard \
     -Dsonar.host.url=https://sonarcloud.io \
     -Dsonar.login=$SONARCUBE_LOGIN
+- task: CopyFiles
+  displayName: 'Copy Files to: Artifact staging'
+  inputs:
+    SourceFolder: '${sytem.defaultworkingdirectory}'
+    Contents: '**/azure-functions/**'
+    TargetFolder: '${build.artifactstagingdirectory}'
+- task: ArchiveFiles@2
+  displayName: 'Archive $(build.artifactstagingdirectory)/target/azure-functions/$(functionAppMvnTargetFolder)'
+  inputs:
+    rootFolderOrFile: '$(build.artifactstagingdirectory)/target/azure-functions/$(functionAppMvnTargetFolder)'
+    includeRootFolder: false
