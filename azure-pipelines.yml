@@ -24,3 +24,15 @@ steps:
     summaryFileLocation: '**/site/jacoco/jacoco.xml'
     goals: 'package'
 # TODO: Find a way to deploy jar / artifact to azure function (maven deploy?)
+- task: Maven@3
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'azure-functions:deploy'
+    
