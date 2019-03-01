@@ -46,5 +46,5 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     includeRootFolder: false
 - bash: 'ls $(Build.ArtifactStagingDirectory)'
-    displayName: 'Bash Script'
+  displayName: 'Bash Script'
 
