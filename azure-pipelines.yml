@@ -6,6 +6,9 @@
 trigger:
 - master
 
+variables:
+  - group: Sample-Function
+
 pool:
   vmImage: 'Ubuntu-16.04'
 
@@ -24,16 +27,9 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     summaryFileLocation: '**/site/jacoco/jacoco.xml'
     goals: 'package'
-- task: Maven@3
-  displayName: Maven-Deploy
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'azure-functions:deploy'
-    
+- bash: |
+    mvn sonar:sonar \
+    -Dsonar.projectKey=iceguard_hello-name-sample-function \
+    -Dsonar.organization=iceguard \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=$SONARCUBE_LOGIN
